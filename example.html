@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example</title>
+</head>
+
+<body>
+
+  <script src="./algosdk.min.js"></script>
+  <script src="./main.js"></script>
+
+  <script>
+
+    // Create algod sdk client
+    const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
+    const algodPort = '';
+    const algodToken = {
+      'X-API-Key': "Cg6qehffpc37kn9VLLf0eqjRK0R0WGt7giDFIfo5"
+    }
+    let algodClient = createAlgodClient(algodServer, algodPort, algodToken)
+
+    // account creation
+    doAccountCreation().then(data => {
+      alert("Account created: " + JSON.stringify(data))
+    })
+
+
+    //getting account details
+    doGetAccountDetails(algodClient, 'O7MYWYE25TYP6POTZT7SA4YAC6EAJI2B7XMUFBXBK7K4BCDGQ4SGL6YDVM').then(data => {
+      alert("Account details : " + JSON.stringify(data))
+    })
+
+    // do transactions ( algo transfer )
+    let senderMnemonic = "relief start derive trophy purpose sniff oil bird glass gun happy maze security debris key assume front garment private stamp cabin horse produce absorb erode"
+    let recipient = 'MI6LQWYP2AWCGKWCWPZGRTMBHYKDGNOIQ5WZCWE7LROITT4NIOGELILHGE';
+    let value = 1;
+    doAlgoTransfer(algodClient, senderMnemonic, recipient, value).then(data => {
+      alert("Transaction details : " + JSON.stringify(data))
+    }).catch(e => {
+      console.error(e)
+    })
+
+    // fetch asset details of an account
+    doGetAssetDetails(algodClient, 'O7MYWYE25TYP6POTZT7SA4YAC6EAJI2B7XMUFBXBK7K4BCDGQ4SGL6YDVM').then(data => {
+      alert("asset details : " + JSON.stringify(data))
+    })
+
+  </script>
+
+</body>
+
+</html>
