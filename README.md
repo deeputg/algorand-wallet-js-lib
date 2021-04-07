@@ -151,3 +151,60 @@ amount: amount to be transfered
     txHash
 }
 ```
+
+
+# Faucet API Specifications
+Faucet API exposes an endpoint that can be used to dispense a small quantity of Algorand tokens (Algo) to a particular account, without charging a fee for the service.
+>The faucet service is free of cost from the perspective of a restaurant, but not ours, since we paid real money to purchase the mainnet Algo tokens.
+
+>Exchange Rate on 15th Feb 2021: 1 ALGO = 1.5 USD
+
+## Methods
+### 1. Request for Algo Token
+
+The endpoint acts like a faucet, used to dispense free Algo tokens to restaurants. So that restaurants/buying.com’s clients can easily send transactions to the Algorand network.
+
+#### Request
+
+|Method|Endpoint|
+|----|----|
+|POST|/api/v1/algorand/faucet
+
+#### Body
+
+|Params|Values|
+|----|------|
+|_receiverAddress|string|
+|_amount|number|
+
+#### _receiverAddress:
+
+the algorand public address/key of the restaurant to which the tokens are to be issued.
+
+#### _amount:
+
+the number of Algo tokens to be dispensed.
+
+>Example POST data: raw JSON
+```
+{
+
+“_receiverAddress“: “public-address“,
+
+“_amount“: 10
+
+}
+```
+
+#### Response
+
+|Status|Response|
+|--------|-------|
+|200|{“success“: true}|
+|400|{"error": "Please specify the recipient’s public address"}|
+|400|{"error": "Please specify the amount of Algo tokens to be dispensed"}|
+|500|{"error": "Something went wrong. Please try again later."}|
+
+
+
+ 
