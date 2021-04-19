@@ -25,10 +25,26 @@ function createAlgodClient(server, port = '', token) {
   return new algosdk.Algodv2(token, server, port);
 }
 
+function createIndexerClient(server, port = '', token) {
+  return new algosdk.Indexer(token, server, port);
+}
+
+
 async function doGetAccountDetails(client, address) {
   try {
     let account_info = (await client.accountInformation(address).do());
     return (account_info);
+  }
+  catch (e) {
+    throw e;
+  }
+}
+
+async function doGetAccountTransactions(indexerClient, address) {
+  try {
+    let response = await indexerClient.searchForTransactions()
+      .address(address).do();
+    return response
   }
   catch (e) {
     throw e;
