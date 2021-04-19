@@ -16,6 +16,7 @@ Create anglorand wallet with the listed functionalities
 ## Functionalities
     doAccountCreation,
     doGetAccountDetails,
+    doGetAccountTransactions,
     doAlgoTransfer,
     doGetAssetDetails, 
     doCreateAsset,
@@ -45,6 +46,18 @@ address: account public address
 @return
 {
     accountDetaials
+}
+```
+
+2.1 doGetAccountTransactions(indexerClinet,address):
+Fetches all trasactions of address
+
+@params
+address: account public address
+
+@return
+{
+    {trasactions[]}
 }
 ```
 
