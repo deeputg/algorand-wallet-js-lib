@@ -23,31 +23,50 @@
     }
     let algodClient = createAlgodClient(algodServer, algodPort, algodToken)
 
+
+    // Create algod indexer client
+    const indexerServer = 'https://testnet-algorand.api.purestake.io/idx2';
+    const indexerPort = '';
+    const indexerToken = {
+      'X-API-Key': "Cg6qehffpc37kn9VLLf0eqjRK0R0WGt7giDFIfo5"
+    }
+
+    let indexerClient = createIndexerClient(indexerServer, indexerPort, indexerToken)
+
     // account creation
-    doAccountCreation().then(data => {
-      alert("Account created: " + JSON.stringify(data))
-    })
+    // doAccountCreation().then(data => {
+    //   alert("Account created: " + JSON.stringify(data))
+    // })
 
 
     //getting account details
-    doGetAccountDetails(algodClient, 'O7MYWYE25TYP6POTZT7SA4YAC6EAJI2B7XMUFBXBK7K4BCDGQ4SGL6YDVM').then(data => {
-      alert("Account details : " + JSON.stringify(data))
+    // doGetAccountDetails(algodClient, 'O7MYWYE25TYP6POTZT7SA4YAC6EAJI2B7XMUFBXBK7K4BCDGQ4SGL6YDVM').then(data => {
+    //   console.log(data)
+
+    //   alert("Account details : " + JSON.stringify(data))
+    // })
+
+    //getting account details
+    doGetAccountTransactions(indexerClient, 'O7MYWYE25TYP6POTZT7SA4YAC6EAJI2B7XMUFBXBK7K4BCDGQ4SGL6YDVM').then(data => {
+      console.log(data)
+
+      alert("Account transactions : " + JSON.stringify(data))
     })
 
     // do transactions ( algo transfer )
-    let senderMnemonic = "relief start derive trophy purpose sniff oil bird glass gun happy maze security debris key assume front garment private stamp cabin horse produce absorb erode"
-    let recipient = 'MI6LQWYP2AWCGKWCWPZGRTMBHYKDGNOIQ5WZCWE7LROITT4NIOGELILHGE';
-    let value = 1;
-    doAlgoTransfer(algodClient, senderMnemonic, recipient, value).then(data => {
-      alert("Transaction details : " + JSON.stringify(data))
-    }).catch(e => {
-      console.error(e)
-    })
+    // let senderMnemonic = "relief start derive trophy purpose sniff oil bird glass gun happy maze security debris key assume front garment private stamp cabin horse produce absorb erode"
+    // let recipient = 'MI6LQWYP2AWCGKWCWPZGRTMBHYKDGNOIQ5WZCWE7LROITT4NIOGELILHGE';
+    // let value = 1;
+    // doAlgoTransfer(algodClient, senderMnemonic, recipient, value).then(data => {
+    //   alert("Transaction details : " + JSON.stringify(data))
+    // }).catch(e => {
+    //   console.error(e)
+    // })
 
     // fetch asset details of an account
-    doGetAssetDetails(algodClient, 'O7MYWYE25TYP6POTZT7SA4YAC6EAJI2B7XMUFBXBK7K4BCDGQ4SGL6YDVM').then(data => {
-      alert("asset details : " + JSON.stringify(data))
-    })
+    // doGetAssetDetails(algodClient, 'O7MYWYE25TYP6POTZT7SA4YAC6EAJI2B7XMUFBXBK7K4BCDGQ4SGL6YDVM').then(data => {
+    //   alert("asset details : " + JSON.stringify(data))
+    // })
 
   </script>
 
